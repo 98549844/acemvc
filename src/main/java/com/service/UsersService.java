@@ -26,9 +26,11 @@ public class UsersService {
     private UserProfileDAO userProfileDAO;
 
     @Autowired
-    public UsersService(UsersMapper usersMapper) {
+    public UsersService(UsersMapper usersMapper, UserProfileDAO userProfileDAO) {
         this.usersMapper = usersMapper;
+        this.userProfileDAO = userProfileDAO;
     }
+
 
 
     public List<Users> findAllByMybatis() {

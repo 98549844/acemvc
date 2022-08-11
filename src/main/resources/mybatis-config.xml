@@ -28,23 +28,24 @@
     <!--    使用class配置Mapper.xml配置文件-->
     <!--    <mapper class="com.sun.dao.UserMapper"/>-->
 
-<!--
-    <settings>
-        &lt;!&ndash;启用延迟加载数据、cacheEnabled，lazyLoadingEnabled&ndash;&gt;
-        &lt;!&ndash;
-			1、延迟加载：用的时候就查询、不用的时候并不会查询
-			2、即使加载：不管你用不用、都会去数据库查询出来
-		&ndash;&gt;
-        <setting name="cacheEnabled" value="true"/>
-        <setting name="lazyLoadingEnabled" value="true"/>
-        &lt;!&ndash;选择日志、选择后需要导入对应的jar包和配置&ndash;&gt;
-        &lt;!&ndash; <setting name="logImpl" value="log4j"/>&ndash;&gt;
-    </settings>
-    -->
+    <!--
+        <settings>
+            &lt;!&ndash;启用延迟加载数据、cacheEnabled，lazyLoadingEnabled&ndash;&gt;
+            &lt;!&ndash;
+                1、延迟加载：用的时候就查询、不用的时候并不会查询
+                2、即使加载：不管你用不用、都会去数据库查询出来
+            &ndash;&gt;
+            <setting name="cacheEnabled" value="true"/>
+            <setting name="lazyLoadingEnabled" value="true"/>
+            &lt;!&ndash;选择日志、选择后需要导入对应的jar包和配置&ndash;&gt;
+            &lt;!&ndash; <setting name="logImpl" value="log4j"/>&ndash;&gt;
+        </settings>
+        -->
 
     <mappers>
         <!--    <package name="com.sun.dao"/>-->
         <!--    <mapper class="com.sun.dao.UserMapper"/>-->
         <mapper resource="com/mapper/xml/UsersMapper.xml"/>
+        <mapper resource="com/mapper/xml/UserProfileDAO.xml"/>
     </mappers>
 </configuration>

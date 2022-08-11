@@ -58,7 +58,7 @@ public class IndexController {
         List<UserProfile> users = usersService.findAllMpfaDemoUsers();
 
         for (int i = 0; i < users.size(); i++) {
-            System.out.println(users.get(i).getEnglishFirstName());
+            System.out.println("MPFA USER:   "+users.get(i).getEnglishFirstName());
         }
 
         return users;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/mvc
+              http://www.springframework.org/schema/mvc/spring-mvc.xsd
+              http://www.springframework.org/schema/aop
+		      http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context.xsd
+              http://www.springframework.org/schema/tx
+		      http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <!-- 1. 在com包及其所有子包下的所有类如果含有@Component,@Controller,@Service,@Repository等 注解的话都会自动纳入到Spring容器中-->
+    <!--<context:annotation-config/>-->
+
+    <!-- 2. Spring也为我们提供了自动为类加上注解的功能. 配置如下-->
+    <!--
+    <context:component-scan base-package="com" use-default-filters="false">
+        <context:include-filter type="regex" expression="cn.itkt.*.service.*.*" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    -->
+
+    <!-- 扫瞄 base-package 路径, 把bean注入容器-->
+    <context:component-scan base-package="com">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+
+        <!--1.type="annotation"：按照注解进行排除，标注了指定注解的组件不要扫描 expression：注解的全类名-->
+        <!--<context:exclude-filter type="annotation" expression=" org.springframework.stereotype.Controller"/>-->
+        <!--2.type="assignable" :指定排除某个具体的类,按照类排除 expression：类的全类名-->
+        <!--<context:exclude-filter type="assignable" expression="com.hh.service.BookService"/>-->
+        <!--3.指定只扫描哪些组件，默认是全都扫描进来所以需要设置use-default-filters="false"-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--4.不扫描com.alimama.trace包-->
+        <!-- <context:exclude-filter type="regex" expression="com.alimama.trace.*"/>-->
+    </context:component-scan>
+
+    <!-- 导入xml其他文件 -->
+    <!--    <import resource="classpath:spring-dao.xml"/>-->
+    <import resource="classpath:springDataSource.xml"/>
+    <import resource="classpath:springService.xml"/>
+    <import resource="classpath:springMvc.xml"/>
+
+</beans>

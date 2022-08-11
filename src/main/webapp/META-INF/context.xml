@@ -1,0 +1,1 @@
+<ResourceLink global="jdbc/mysql" name="jdbc/mysql" type="javax.sql.DataSource"/>

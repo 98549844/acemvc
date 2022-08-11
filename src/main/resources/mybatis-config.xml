@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration core file-->
+<configuration>
+    <!--    <typeAliases>-->
+    <!--        <package name="com.mapper"/>-->
+    <!--    </typeAliases>-->
+    <!--    <environments default="development">-->
+    <!--        <environment id="development">-->
+    <!--            <transactionManager type="JDBC"/>-->
+    <!--            <dataSource type="POOLED">-->
+    <!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+    <!--                <property name="url"-->
+    <!--                          value="jdbc:mysql://localhost:3306/ace?characterEncoding=UTF-8&amp;useSSL=false&amp;useTimezone=true&amp;serverTimezone=GMT%2B8"/>-->
+    <!--                <property name="username" value="root"/>-->
+    <!--                <property name="password" value="root"/>-->
+    <!--            </dataSource>-->
+    <!--        </environment>-->
+    <!--    </environments>-->
+
+    <!--    Mybatis配置mapper.xml的三种方式-->
+    <!--    使用package 配置XXXMapper.xml所在的包-->
+    <!--    <package name="com.sun.dao"/>-->
+    <!--    使用resource配置Mapper.xml在mybatis核心配置文件中注册-->
+    <!--    <mapper resource="com/sun/dao/UserMapper.xml"/>-->
+    <!--    使用class配置Mapper.xml配置文件-->
+    <!--    <mapper class="com.sun.dao.UserMapper"/>-->
+
+<!--
+    <settings>
+        &lt;!&ndash;启用延迟加载数据、cacheEnabled，lazyLoadingEnabled&ndash;&gt;
+        &lt;!&ndash;
+			1、延迟加载：用的时候就查询、不用的时候并不会查询
+			2、即使加载：不管你用不用、都会去数据库查询出来
+		&ndash;&gt;
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        &lt;!&ndash;选择日志、选择后需要导入对应的jar包和配置&ndash;&gt;
+        &lt;!&ndash; <setting name="logImpl" value="log4j"/>&ndash;&gt;
+    </settings>
+    -->
+
+    <mappers>
+        <!--    <package name="com.sun.dao"/>-->
+        <!--    <mapper class="com.sun.dao.UserMapper"/>-->
+        <mapper resource="com/mapper/xml/UsersMapper.xml"/>
+    </mappers>
+</configuration>

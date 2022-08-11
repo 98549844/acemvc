@@ -1,0 +1,8 @@
+xml版 springmvc整合mybatis
+https://blog.csdn.net/qq_43769249/article/details/122695347
+
+java版 springmvc整合mybatis
+https://blog.csdn.net/qq_41071876/article/details/118898137
+
+mybatis generator to gen crud
+https://blog.csdn.net/She_lock/article/details/79509478

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--JDBC Config-->
+    <!--1.关联数据库配置文件-->
+<!--    <context:property-placeholder location="classpath:database.properties"/>-->
+
+    <!--2.数据库连接池-->
+<!--
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        &lt;!&ndash;c3p0连接池的私有属性 &ndash;&gt;
+        <property name="maxPoolSize" value="30"/>
+        <property name="minPoolSize" value="10"/>
+        &lt;!&ndash;关闭连接后不自动commit&ndash;&gt;
+        <property name="autoCommitOnClose" value="false"/>
+        &lt;!&ndash;获取连接超时时间&ndash;&gt;
+        <property name="checkoutTimeout" value="10000"/>
+        &lt;!&ndash;当获取连接失败重试次数&ndash;&gt;
+        <property name="acquireRetryAttempts" value="2"/>
+    </bean>
+-->
+
+
+
+    <!--2. 数据源 使用JNDI配置 -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>java:comp/env/jdbc/mysql</value>
+        </property>
+    </bean>
+
+
+    <!--3.sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis的配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!--配置dao接口扫描包，动态的实现了Dao接口可以注入到Spring容器中！-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入 sqlSessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--要扫描的mapper interface-->
+        <property name="basePackage" value="com.mapper"/>
+    </bean>
+
+
+    <!-- JDNI Config-->
+    <!--数据源，使用DBCP-->
+    <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="${jdbc.driver}" />
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+            <property name="maxActive" value="10" />
+            <property name="maxIdle" value="5" />
+    </bean> -->
+
+
+
+
+</beans>
+

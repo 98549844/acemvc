@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.entity.UserProfile;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import java.util.List;
  * @Author: kalam_au
  * @Description:
  */
+
+@Repository
 public interface UserProfileDAO {
     int deleteByPrimaryKey(String id);
 

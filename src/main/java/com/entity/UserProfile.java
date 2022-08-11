@@ -2,12 +2,10 @@ package com.entity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,67 +23,100 @@ import java.util.Date;
 public class UserProfile implements Serializable {
     private static final Logger log = LogManager.getLogger(UserProfile.class.getName());
 
-
+    @Id
+    @Column(name = "UPF_USER_ID")
     private String id;
 
+
+    @Column(name = "UPF_ENG_NAME")
     private String englishName;
 
+
+    @Column(name = "UPF_CHI_NAME")
     private String chineseName;
 
+    @Column(name = "UPF_EMAIL")
     private String email;
 
+    @Column(name = "UPF_FAX")
     private String fax;
 
+    @Column(name = "UPF_TEL")
     private String tel;
 
+    @Column(name = "UPF_LOC")
     private String locationCode;
 
+    @Column(name = "UPF_SALUTATION")
     private String salutationCode;
 
+    @Column(name = "UPF_DEPARTMENT")
     private String departmentCode;
 
+    @Column(name = "UPF_RANK")
     private String rankCode;
 
+    @Column(name = "UPF_STATUS")
     private String status;
 
+    @Column(name = "UPF_ENG_FIRST_NAME")
     private String englishFirstName;
 
+    @Column(name = "UPF_ENG_LAST_NAME")
     private String englishLastName;
 
+    @Column(name = "UPF_CHI_FIRST_NAME")
     private String chineseFirstName;
 
+    @Column(name = "UPF_CHI_LAST_NAME")
     private String chineseLastName;
 
+    @Column(name = "UPF_PWD")
     private String password;
 
+    @Column(name = "UPF_PWD_CHG_DT")
     private Date passwordChangedDate;
 
+    @Column(name = "UPF_FAIL_COUNT")
     private Integer failCount;
 
+    @Column(name = "UPF_LAST_LOCK_TIME")
     private Date lastLockTime;
 
+    @Column(name = "UPF_LAST_LOGIN")
     private Date lastLogin;
 
+    @Column(name = "UPF_VERSION_NO")
     private Long version;
 
+    @Column(name = "UPF_CREATE_DT")
     private Date createdDate;
 
+    @Column(name = "UPF_CREATE_USER")
     private String createdUser;
 
+    @Column(name = "UPF_MODIFY_DT")
     private Date modifiedDate;
 
+    @Column(name = "UPF_MODIFY_USER")
     private String modifiedUser;
 
+    @Column(name = "UPF_LDAP_PRINCIPAL")
     private String ldapPrincipal;
 
+    @Column(name = "UPF_EFS_USER_ID")
     private String efsUserId;
 
+    @Column(name = "UPF_TR_ADMIN_GRP_ID")
     private String trAdminGroupId;
 
+    @Column(name = "UPF_NOTES_EMAIL")
     private String upfNotesEmail;
 
+    @Column(name = "UPF_DIVISION")
     private String upfDivision;
 
+    @Column(name = "")
     private static final long serialVersionUID = 1L;
 
     public UserProfile(String id, String englishName, String chineseName, String email, String fax, String tel, String locationCode, String salutationCode, String departmentCode, String rankCode, String status, String englishFirstName, String englishLastName, String chineseFirstName, String chineseLastName, String password, Date passwordChangedDate, Integer failCount, Date lastLockTime, Date lastLogin, Long version, Date createdDate, String createdUser, Date modifiedDate, String modifiedUser, String ldapPrincipal, String efsUserId, String trAdminGroupId, String upfNotesEmail, String upfDivision) {

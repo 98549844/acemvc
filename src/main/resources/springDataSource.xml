@@ -34,6 +34,7 @@
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName">
             <value>java:comp/env/jdbc/mysql</value>
+<!--            <value>java:comp/env/dmap/global</value>-->
         </property>
     </bean>
 

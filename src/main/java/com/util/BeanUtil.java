@@ -1,9 +1,12 @@
 package com.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
 public class BeanUtil {
+    private static final Logger log = LogManager.getLogger(BeanUtil.class.getName());
 
     private static ApplicationContext applicationContext;
 
@@ -14,10 +17,10 @@ public class BeanUtil {
         ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
         BeanUtil.applicationContext = context;
         String[] beanNames = BeanUtil.applicationContext.getBeanDefinitionNames();
-        System.out.println("total bean: {}" + BeanUtil.applicationContext.getBeanDefinitionCount());
+        log.info("total bean: {}", BeanUtil.applicationContext.getBeanDefinitionCount());
         int i = 0;
         for (String s : beanNames) {
-            System.out.println("{},beanName: {}" + ++i + s);
+            log.info("{},beanName: {}", ++i, s);
         }
     }
 

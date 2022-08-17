@@ -11,19 +11,23 @@
     <display-name>Ace Application</display-name>
     <description>Ace Mvc Application</description>
 
+    <!--“ContextLoaderListener的作用就是启动Web容器时,读取在contextConfigLocation中定义的xml文件-->
+    <!--启动bean scan功能-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-    <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-
-
+    <!--不特意指定参数名为contextConfigLoction的<context-parameter>元素,
+    spring的ContextLoaderListener监听器就会在
+    /WEB-INF/下去寻找并加载该目录下的名为applicationContext.xml这个文件.
+    所以,应该在web.xml中添加<context-param>标签并再次指定spring核心文件的位置-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
 
 
     <!--configure the setting of springmvcDispatcherServlet and configure the mapping-->
+    <!--url and controller mapping-->
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -37,15 +41,6 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!--不特意指定参数名为contextConfigLoction的<context-parameter>元素,
-    那么spring的ContextLoderListener监听器就会在
-    /WEB-INF/下去寻找并加载该目录下的名为applicationContext.xml这个文件.
-    所以,我们应该在web.xml中添加<context-param>标签并再次指定spring核心文件的位置-->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
-    </context-param>
 
 
     <!--乱码过滤-->
@@ -62,24 +57,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-<!--
+    <!--
 
-        <servlet>
-            <servlet-name>DispatcherServlet</servlet-name>
-            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-            <init-param>
-                <param-name>contextConfigLocation</param-name>
-                <param-value>classpath:applicationContext.xml</param-value>
-            </init-param>
-            <load-on-startup>1</load-on-startup>
-        </servlet>
+            <servlet>
+                <servlet-name>DispatcherServlet</servlet-name>
+                <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+                <init-param>
+                    <param-name>contextConfigLocation</param-name>
+                    <param-value>classpath:applicationContext.xml</param-value>
+                </init-param>
+                <load-on-startup>1</load-on-startup>
+            </servlet>
 
-        <servlet-mapping>
-            <servlet-name>DispatcherServlet</servlet-name>
-            <url-pattern>/</url-pattern>
-        </servlet-mapping>
+            <servlet-mapping>
+                <servlet-name>DispatcherServlet</servlet-name>
+                <url-pattern>/</url-pattern>
+            </servlet-mapping>
 
--->
+    -->
 
     <session-config>
         <session-timeout>30</session-timeout>
@@ -90,5 +85,9 @@
         <location>/error.jsp</location>
     </error-page>
 
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>

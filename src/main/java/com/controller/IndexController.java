@@ -1,7 +1,5 @@
 package com.controller;
 
-import com.entity.RFncFunction;
-import com.entity.RFncFunctionKey;
 import com.entity.UserProfile;
 import com.entity.Users;
 import com.service.RFncFunctionService;
@@ -57,8 +55,19 @@ public class IndexController {
         return ls;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
+    public List<UserProfile> getAllMpfaUsers() {
+        List<UserProfile> users = usersService.findAllMpfaDemoUsers();
 
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println("MPFA USER:   " + users.get(i).getEnglishFirstName());
+        }
+
+        return users;
+    }
+
+
+/*    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
     public List<RFncFunction> getAllRfn() {
         try {
             List<RFncFunction> ls = rFncFunctionService.findAll();
@@ -88,18 +97,9 @@ public class IndexController {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
-    public List<UserProfile> getAllMpfaUsers() {
-        List<UserProfile> users = usersService.findAllMpfaDemoUsers();
 
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println("MPFA USER:   " + users.get(i).getEnglishFirstName());
-        }
-
-        return users;
-    }
 }
 

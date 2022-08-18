@@ -1,7 +1,10 @@
 package com.controller;
 
+import com.entity.RFncFunction;
+import com.entity.RFncFunctionKey;
 import com.entity.UserProfile;
 import com.entity.Users;
+import com.service.RFncFunctionService;
 import com.service.UsersService;
 import com.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,12 @@ import java.util.List;
 public class IndexController {
 
     private UsersService usersService;
+    private RFncFunctionService rFncFunctionService;
 
     @Autowired
-    public IndexController(UsersService usersService) {
+    public IndexController(UsersService usersService, RFncFunctionService rFncFunctionService) {
         this.usersService = usersService;
+        this.rFncFunctionService = rFncFunctionService;
 
     }
 
@@ -53,12 +58,45 @@ public class IndexController {
     }
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
+    public List<RFncFunction> getAllRfn() {
+        try {
+            List<RFncFunction> ls = rFncFunctionService.findAll();
+            for (int i = 0; i < ls.size(); i++) {
+                System.out.println(ls.get(i).getFncDesc());
+            }
+            return ls;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getRfn")
+    public RFncFunction getRfn() {
+
+        RFncFunctionKey key = new RFncFunctionKey();
+        key.setFncApplId("ACE2DEMO");
+        key.setFncParentFuncId("ACE2DEMO");
+        key.setFncFuncId("RANK");
+
+        try {
+            RFncFunction rFncFunction = rFncFunctionService.findByKey(key);
+            System.out.println(rFncFunction.getFncDesc());
+            return rFncFunction;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
     public List<UserProfile> getAllMpfaUsers() {
         List<UserProfile> users = usersService.findAllMpfaDemoUsers();
 
         for (int i = 0; i < users.size(); i++) {
-            System.out.println("MPFA USER:   "+users.get(i).getEnglishFirstName());
+            System.out.println("MPFA USER:   " + users.get(i).getEnglishFirstName());
         }
 
         return users;

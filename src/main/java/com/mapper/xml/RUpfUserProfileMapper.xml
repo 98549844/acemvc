@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RUpfUserProfileMapper">
+  <resultMap id="BaseResultMap" type="com.entity.RUpfUserProfile">
+    <id column="UPF_USER_ID" jdbcType="VARCHAR" property="upfUserId" />
+    <result column="UPF_ENG_NAME" jdbcType="VARCHAR" property="upfEngName" />
+    <result column="UPF_CHI_NAME" jdbcType="VARCHAR" property="upfChiName" />
+    <result column="UPF_EMAIL" jdbcType="VARCHAR" property="upfEmail" />
+    <result column="UPF_FAX" jdbcType="VARCHAR" property="upfFax" />
+    <result column="UPF_TEL" jdbcType="VARCHAR" property="upfTel" />
+    <result column="UPF_LOC" jdbcType="VARCHAR" property="upfLoc" />
+    <result column="UPF_SALUTATION" jdbcType="VARCHAR" property="upfSalutation" />
+    <result column="UPF_DEPARTMENT" jdbcType="VARCHAR" property="upfDepartment" />
+    <result column="UPF_RANK" jdbcType="VARCHAR" property="upfRank" />
+    <result column="UPF_STATUS" jdbcType="VARCHAR" property="upfStatus" />
+    <result column="UPF_ENG_FIRST_NAME" jdbcType="VARCHAR" property="upfEngFirstName" />
+    <result column="UPF_ENG_LAST_NAME" jdbcType="VARCHAR" property="upfEngLastName" />
+    <result column="UPF_CHI_FIRST_NAME" jdbcType="VARCHAR" property="upfChiFirstName" />
+    <result column="UPF_CHI_LAST_NAME" jdbcType="VARCHAR" property="upfChiLastName" />
+    <result column="UPF_PWD" jdbcType="VARCHAR" property="upfPwd" />
+    <result column="UPF_PWD_CHG_DT" jdbcType="TIMESTAMP" property="upfPwdChgDt" />
+    <result column="UPF_FAIL_COUNT" jdbcType="NUMERIC" property="upfFailCount" />
+    <result column="UPF_LAST_LOCK_TIME" jdbcType="TIMESTAMP" property="upfLastLockTime" />
+    <result column="UPF_LAST_LOGIN" jdbcType="TIMESTAMP" property="upfLastLogin" />
+    <result column="UPF_VERSION_NO" jdbcType="NUMERIC" property="upfVersionNo" />
+    <result column="UPF_CREATE_DT" jdbcType="TIMESTAMP" property="upfCreateDt" />
+    <result column="UPF_CREATE_USER" jdbcType="VARCHAR" property="upfCreateUser" />
+    <result column="UPF_MODIFY_DT" jdbcType="TIMESTAMP" property="upfModifyDt" />
+    <result column="UPF_MODIFY_USER" jdbcType="VARCHAR" property="upfModifyUser" />
+    <result column="UPF_LDAP_PRINCIPAL" jdbcType="VARCHAR" property="upfLdapPrincipal" />
+    <result column="UPF_EFS_USER_ID" jdbcType="VARCHAR" property="upfEfsUserId" />
+    <result column="UPF_TR_ADMIN_GRP_ID" jdbcType="VARCHAR" property="upfTrAdminGrpId" />
+    <result column="UPF_NOTES_EMAIL" jdbcType="VARCHAR" property="upfNotesEmail" />
+    <result column="UPF_DIVISION" jdbcType="VARCHAR" property="upfDivision" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UPF_USER_ID, UPF_ENG_NAME, UPF_CHI_NAME, UPF_EMAIL, UPF_FAX, UPF_TEL, UPF_LOC, UPF_SALUTATION, 
+    UPF_DEPARTMENT, UPF_RANK, UPF_STATUS, UPF_ENG_FIRST_NAME, UPF_ENG_LAST_NAME, UPF_CHI_FIRST_NAME, 
+    UPF_CHI_LAST_NAME, UPF_PWD, UPF_PWD_CHG_DT, UPF_FAIL_COUNT, UPF_LAST_LOCK_TIME, UPF_LAST_LOGIN, 
+    UPF_VERSION_NO, UPF_CREATE_DT, UPF_CREATE_USER, UPF_MODIFY_DT, UPF_MODIFY_USER, UPF_LDAP_PRINCIPAL, 
+    UPF_EFS_USER_ID, UPF_TR_ADMIN_GRP_ID, UPF_NOTES_EMAIL, UPF_DIVISION
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.RUpfUserProfileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from R_UPF_USER_PROFILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectAll" parameterType="com.entity.RUpfUserProfileExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from R_UPF_USER_PROFILE
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from R_UPF_USER_PROFILE
+    where UPF_USER_ID = #{upfUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from R_UPF_USER_PROFILE
+    where UPF_USER_ID = #{upfUserId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.RUpfUserProfileExample">
+    delete from R_UPF_USER_PROFILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.RUpfUserProfile">
+    insert into R_UPF_USER_PROFILE (UPF_USER_ID, UPF_ENG_NAME, UPF_CHI_NAME, 
+      UPF_EMAIL, UPF_FAX, UPF_TEL, 
+      UPF_LOC, UPF_SALUTATION, UPF_DEPARTMENT, 
+      UPF_RANK, UPF_STATUS, UPF_ENG_FIRST_NAME, 
+      UPF_ENG_LAST_NAME, UPF_CHI_FIRST_NAME, UPF_CHI_LAST_NAME, 
+      UPF_PWD, UPF_PWD_CHG_DT, UPF_FAIL_COUNT, 
+      UPF_LAST_LOCK_TIME, UPF_LAST_LOGIN, UPF_VERSION_NO, 
+      UPF_CREATE_DT, UPF_CREATE_USER, UPF_MODIFY_DT, 
+      UPF_MODIFY_USER, UPF_LDAP_PRINCIPAL, UPF_EFS_USER_ID, 
+      UPF_TR_ADMIN_GRP_ID, UPF_NOTES_EMAIL, UPF_DIVISION
+      )
+    values (#{upfUserId,jdbcType=VARCHAR}, #{upfEngName,jdbcType=VARCHAR}, #{upfChiName,jdbcType=VARCHAR}, 
+      #{upfEmail,jdbcType=VARCHAR}, #{upfFax,jdbcType=VARCHAR}, #{upfTel,jdbcType=VARCHAR}, 
+      #{upfLoc,jdbcType=VARCHAR}, #{upfSalutation,jdbcType=VARCHAR}, #{upfDepartment,jdbcType=VARCHAR}, 
+      #{upfRank,jdbcType=VARCHAR}, #{upfStatus,jdbcType=VARCHAR}, #{upfEngFirstName,jdbcType=VARCHAR}, 
+      #{upfEngLastName,jdbcType=VARCHAR}, #{upfChiFirstName,jdbcType=VARCHAR}, #{upfChiLastName,jdbcType=VARCHAR}, 
+      #{upfPwd,jdbcType=VARCHAR}, #{upfPwdChgDt,jdbcType=TIMESTAMP}, #{upfFailCount,jdbcType=NUMERIC}, 
+      #{upfLastLockTime,jdbcType=TIMESTAMP}, #{upfLastLogin,jdbcType=TIMESTAMP}, #{upfVersionNo,jdbcType=NUMERIC}, 
+      #{upfCreateDt,jdbcType=TIMESTAMP}, #{upfCreateUser,jdbcType=VARCHAR}, #{upfModifyDt,jdbcType=TIMESTAMP}, 
+      #{upfModifyUser,jdbcType=VARCHAR}, #{upfLdapPrincipal,jdbcType=VARCHAR}, #{upfEfsUserId,jdbcType=VARCHAR}, 
+      #{upfTrAdminGrpId,jdbcType=VARCHAR}, #{upfNotesEmail,jdbcType=VARCHAR}, #{upfDivision,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.RUpfUserProfile">
+    insert into R_UPF_USER_PROFILE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="upfUserId != null">
+        UPF_USER_ID,
+      </if>
+      <if test="upfEngName != null">
+        UPF_ENG_NAME,
+      </if>
+      <if test="upfChiName != null">
+        UPF_CHI_NAME,
+      </if>
+      <if test="upfEmail != null">
+        UPF_EMAIL,
+      </if>
+      <if test="upfFax != null">
+        UPF_FAX,
+      </if>
+      <if test="upfTel != null">
+        UPF_TEL,
+      </if>
+      <if test="upfLoc != null">
+        UPF_LOC,
+      </if>
+      <if test="upfSalutation != null">
+        UPF_SALUTATION,
+      </if>
+      <if test="upfDepartment != null">
+        UPF_DEPARTMENT,
+      </if>
+      <if test="upfRank != null">
+        UPF_RANK,
+      </if>
+      <if test="upfStatus != null">
+        UPF_STATUS,
+      </if>
+      <if test="upfEngFirstName != null">
+        UPF_ENG_FIRST_NAME,
+      </if>
+      <if test="upfEngLastName != null">
+        UPF_ENG_LAST_NAME,
+      </if>
+      <if test="upfChiFirstName != null">
+        UPF_CHI_FIRST_NAME,
+      </if>
+      <if test="upfChiLastName != null">
+        UPF_CHI_LAST_NAME,
+      </if>
+      <if test="upfPwd != null">
+        UPF_PWD,
+      </if>
+      <if test="upfPwdChgDt != null">
+        UPF_PWD_CHG_DT,
+      </if>
+      <if test="upfFailCount != null">
+        UPF_FAIL_COUNT,
+      </if>
+      <if test="upfLastLockTime != null">
+        UPF_LAST_LOCK_TIME,
+      </if>
+      <if test="upfLastLogin != null">
+        UPF_LAST_LOGIN,
+      </if>
+      <if test="upfVersionNo != null">
+        UPF_VERSION_NO,
+      </if>
+      <if test="upfCreateDt != null">
+        UPF_CREATE_DT,
+      </if>
+      <if test="upfCreateUser != null">
+        UPF_CREATE_USER,
+      </if>
+      <if test="upfModifyDt != null">
+        UPF_MODIFY_DT,
+      </if>
+      <if test="upfModifyUser != null">
+        UPF_MODIFY_USER,
+      </if>
+      <if test="upfLdapPrincipal != null">
+        UPF_LDAP_PRINCIPAL,
+      </if>
+      <if test="upfEfsUserId != null">
+        UPF_EFS_USER_ID,
+      </if>
+      <if test="upfTrAdminGrpId != null">
+        UPF_TR_ADMIN_GRP_ID,
+      </if>
+      <if test="upfNotesEmail != null">
+        UPF_NOTES_EMAIL,
+      </if>
+      <if test="upfDivision != null">
+        UPF_DIVISION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="upfUserId != null">
+        #{upfUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEngName != null">
+        #{upfEngName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiName != null">
+        #{upfChiName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEmail != null">
+        #{upfEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="upfFax != null">
+        #{upfFax,jdbcType=VARCHAR},
+      </if>
+      <if test="upfTel != null">
+        #{upfTel,jdbcType=VARCHAR},
+      </if>
+      <if test="upfLoc != null">
+        #{upfLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="upfSalutation != null">
+        #{upfSalutation,jdbcType=VARCHAR},
+      </if>
+      <if test="upfDepartment != null">
+        #{upfDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="upfRank != null">
+        #{upfRank,jdbcType=VARCHAR},
+      </if>
+      <if test="upfStatus != null">
+        #{upfStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEngFirstName != null">
+        #{upfEngFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEngLastName != null">
+        #{upfEngLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiFirstName != null">
+        #{upfChiFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiLastName != null">
+        #{upfChiLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfPwd != null">
+        #{upfPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="upfPwdChgDt != null">
+        #{upfPwdChgDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfFailCount != null">
+        #{upfFailCount,jdbcType=NUMERIC},
+      </if>
+      <if test="upfLastLockTime != null">
+        #{upfLastLockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfLastLogin != null">
+        #{upfLastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfVersionNo != null">
+        #{upfVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="upfCreateDt != null">
+        #{upfCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfCreateUser != null">
+        #{upfCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upfModifyDt != null">
+        #{upfModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfModifyUser != null">
+        #{upfModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upfLdapPrincipal != null">
+        #{upfLdapPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEfsUserId != null">
+        #{upfEfsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="upfTrAdminGrpId != null">
+        #{upfTrAdminGrpId,jdbcType=VARCHAR},
+      </if>
+      <if test="upfNotesEmail != null">
+        #{upfNotesEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="upfDivision != null">
+        #{upfDivision,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.RUpfUserProfileExample" resultType="java.lang.Long">
+    select count(*) from R_UPF_USER_PROFILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update R_UPF_USER_PROFILE
+    <set>
+      <if test="row.upfUserId != null">
+        UPF_USER_ID = #{row.upfUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfEngName != null">
+        UPF_ENG_NAME = #{row.upfEngName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfChiName != null">
+        UPF_CHI_NAME = #{row.upfChiName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfEmail != null">
+        UPF_EMAIL = #{row.upfEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfFax != null">
+        UPF_FAX = #{row.upfFax,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfTel != null">
+        UPF_TEL = #{row.upfTel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfLoc != null">
+        UPF_LOC = #{row.upfLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfSalutation != null">
+        UPF_SALUTATION = #{row.upfSalutation,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfDepartment != null">
+        UPF_DEPARTMENT = #{row.upfDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfRank != null">
+        UPF_RANK = #{row.upfRank,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfStatus != null">
+        UPF_STATUS = #{row.upfStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfEngFirstName != null">
+        UPF_ENG_FIRST_NAME = #{row.upfEngFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfEngLastName != null">
+        UPF_ENG_LAST_NAME = #{row.upfEngLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfChiFirstName != null">
+        UPF_CHI_FIRST_NAME = #{row.upfChiFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfChiLastName != null">
+        UPF_CHI_LAST_NAME = #{row.upfChiLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfPwd != null">
+        UPF_PWD = #{row.upfPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfPwdChgDt != null">
+        UPF_PWD_CHG_DT = #{row.upfPwdChgDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.upfFailCount != null">
+        UPF_FAIL_COUNT = #{row.upfFailCount,jdbcType=NUMERIC},
+      </if>
+      <if test="row.upfLastLockTime != null">
+        UPF_LAST_LOCK_TIME = #{row.upfLastLockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.upfLastLogin != null">
+        UPF_LAST_LOGIN = #{row.upfLastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.upfVersionNo != null">
+        UPF_VERSION_NO = #{row.upfVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="row.upfCreateDt != null">
+        UPF_CREATE_DT = #{row.upfCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.upfCreateUser != null">
+        UPF_CREATE_USER = #{row.upfCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfModifyDt != null">
+        UPF_MODIFY_DT = #{row.upfModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.upfModifyUser != null">
+        UPF_MODIFY_USER = #{row.upfModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfLdapPrincipal != null">
+        UPF_LDAP_PRINCIPAL = #{row.upfLdapPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfEfsUserId != null">
+        UPF_EFS_USER_ID = #{row.upfEfsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfTrAdminGrpId != null">
+        UPF_TR_ADMIN_GRP_ID = #{row.upfTrAdminGrpId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfNotesEmail != null">
+        UPF_NOTES_EMAIL = #{row.upfNotesEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="row.upfDivision != null">
+        UPF_DIVISION = #{row.upfDivision,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update R_UPF_USER_PROFILE
+    set UPF_USER_ID = #{row.upfUserId,jdbcType=VARCHAR},
+      UPF_ENG_NAME = #{row.upfEngName,jdbcType=VARCHAR},
+      UPF_CHI_NAME = #{row.upfChiName,jdbcType=VARCHAR},
+      UPF_EMAIL = #{row.upfEmail,jdbcType=VARCHAR},
+      UPF_FAX = #{row.upfFax,jdbcType=VARCHAR},
+      UPF_TEL = #{row.upfTel,jdbcType=VARCHAR},
+      UPF_LOC = #{row.upfLoc,jdbcType=VARCHAR},
+      UPF_SALUTATION = #{row.upfSalutation,jdbcType=VARCHAR},
+      UPF_DEPARTMENT = #{row.upfDepartment,jdbcType=VARCHAR},
+      UPF_RANK = #{row.upfRank,jdbcType=VARCHAR},
+      UPF_STATUS = #{row.upfStatus,jdbcType=VARCHAR},
+      UPF_ENG_FIRST_NAME = #{row.upfEngFirstName,jdbcType=VARCHAR},
+      UPF_ENG_LAST_NAME = #{row.upfEngLastName,jdbcType=VARCHAR},
+      UPF_CHI_FIRST_NAME = #{row.upfChiFirstName,jdbcType=VARCHAR},
+      UPF_CHI_LAST_NAME = #{row.upfChiLastName,jdbcType=VARCHAR},
+      UPF_PWD = #{row.upfPwd,jdbcType=VARCHAR},
+      UPF_PWD_CHG_DT = #{row.upfPwdChgDt,jdbcType=TIMESTAMP},
+      UPF_FAIL_COUNT = #{row.upfFailCount,jdbcType=NUMERIC},
+      UPF_LAST_LOCK_TIME = #{row.upfLastLockTime,jdbcType=TIMESTAMP},
+      UPF_LAST_LOGIN = #{row.upfLastLogin,jdbcType=TIMESTAMP},
+      UPF_VERSION_NO = #{row.upfVersionNo,jdbcType=NUMERIC},
+      UPF_CREATE_DT = #{row.upfCreateDt,jdbcType=TIMESTAMP},
+      UPF_CREATE_USER = #{row.upfCreateUser,jdbcType=VARCHAR},
+      UPF_MODIFY_DT = #{row.upfModifyDt,jdbcType=TIMESTAMP},
+      UPF_MODIFY_USER = #{row.upfModifyUser,jdbcType=VARCHAR},
+      UPF_LDAP_PRINCIPAL = #{row.upfLdapPrincipal,jdbcType=VARCHAR},
+      UPF_EFS_USER_ID = #{row.upfEfsUserId,jdbcType=VARCHAR},
+      UPF_TR_ADMIN_GRP_ID = #{row.upfTrAdminGrpId,jdbcType=VARCHAR},
+      UPF_NOTES_EMAIL = #{row.upfNotesEmail,jdbcType=VARCHAR},
+      UPF_DIVISION = #{row.upfDivision,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.RUpfUserProfile">
+    update R_UPF_USER_PROFILE
+    <set>
+      <if test="upfEngName != null">
+        UPF_ENG_NAME = #{upfEngName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiName != null">
+        UPF_CHI_NAME = #{upfChiName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEmail != null">
+        UPF_EMAIL = #{upfEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="upfFax != null">
+        UPF_FAX = #{upfFax,jdbcType=VARCHAR},
+      </if>
+      <if test="upfTel != null">
+        UPF_TEL = #{upfTel,jdbcType=VARCHAR},
+      </if>
+      <if test="upfLoc != null">
+        UPF_LOC = #{upfLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="upfSalutation != null">
+        UPF_SALUTATION = #{upfSalutation,jdbcType=VARCHAR},
+      </if>
+      <if test="upfDepartment != null">
+        UPF_DEPARTMENT = #{upfDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="upfRank != null">
+        UPF_RANK = #{upfRank,jdbcType=VARCHAR},
+      </if>
+      <if test="upfStatus != null">
+        UPF_STATUS = #{upfStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEngFirstName != null">
+        UPF_ENG_FIRST_NAME = #{upfEngFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEngLastName != null">
+        UPF_ENG_LAST_NAME = #{upfEngLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiFirstName != null">
+        UPF_CHI_FIRST_NAME = #{upfChiFirstName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfChiLastName != null">
+        UPF_CHI_LAST_NAME = #{upfChiLastName,jdbcType=VARCHAR},
+      </if>
+      <if test="upfPwd != null">
+        UPF_PWD = #{upfPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="upfPwdChgDt != null">
+        UPF_PWD_CHG_DT = #{upfPwdChgDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfFailCount != null">
+        UPF_FAIL_COUNT = #{upfFailCount,jdbcType=NUMERIC},
+      </if>
+      <if test="upfLastLockTime != null">
+        UPF_LAST_LOCK_TIME = #{upfLastLockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfLastLogin != null">
+        UPF_LAST_LOGIN = #{upfLastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfVersionNo != null">
+        UPF_VERSION_NO = #{upfVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="upfCreateDt != null">
+        UPF_CREATE_DT = #{upfCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfCreateUser != null">
+        UPF_CREATE_USER = #{upfCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upfModifyDt != null">
+        UPF_MODIFY_DT = #{upfModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upfModifyUser != null">
+        UPF_MODIFY_USER = #{upfModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upfLdapPrincipal != null">
+        UPF_LDAP_PRINCIPAL = #{upfLdapPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="upfEfsUserId != null">
+        UPF_EFS_USER_ID = #{upfEfsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="upfTrAdminGrpId != null">
+        UPF_TR_ADMIN_GRP_ID = #{upfTrAdminGrpId,jdbcType=VARCHAR},
+      </if>
+      <if test="upfNotesEmail != null">
+        UPF_NOTES_EMAIL = #{upfNotesEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="upfDivision != null">
+        UPF_DIVISION = #{upfDivision,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UPF_USER_ID = #{upfUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.RUpfUserProfile">
+    update R_UPF_USER_PROFILE
+    set UPF_ENG_NAME = #{upfEngName,jdbcType=VARCHAR},
+      UPF_CHI_NAME = #{upfChiName,jdbcType=VARCHAR},
+      UPF_EMAIL = #{upfEmail,jdbcType=VARCHAR},
+      UPF_FAX = #{upfFax,jdbcType=VARCHAR},
+      UPF_TEL = #{upfTel,jdbcType=VARCHAR},
+      UPF_LOC = #{upfLoc,jdbcType=VARCHAR},
+      UPF_SALUTATION = #{upfSalutation,jdbcType=VARCHAR},
+      UPF_DEPARTMENT = #{upfDepartment,jdbcType=VARCHAR},
+      UPF_RANK = #{upfRank,jdbcType=VARCHAR},
+      UPF_STATUS = #{upfStatus,jdbcType=VARCHAR},
+      UPF_ENG_FIRST_NAME = #{upfEngFirstName,jdbcType=VARCHAR},
+      UPF_ENG_LAST_NAME = #{upfEngLastName,jdbcType=VARCHAR},
+      UPF_CHI_FIRST_NAME = #{upfChiFirstName,jdbcType=VARCHAR},
+      UPF_CHI_LAST_NAME = #{upfChiLastName,jdbcType=VARCHAR},
+      UPF_PWD = #{upfPwd,jdbcType=VARCHAR},
+      UPF_PWD_CHG_DT = #{upfPwdChgDt,jdbcType=TIMESTAMP},
+      UPF_FAIL_COUNT = #{upfFailCount,jdbcType=NUMERIC},
+      UPF_LAST_LOCK_TIME = #{upfLastLockTime,jdbcType=TIMESTAMP},
+      UPF_LAST_LOGIN = #{upfLastLogin,jdbcType=TIMESTAMP},
+      UPF_VERSION_NO = #{upfVersionNo,jdbcType=NUMERIC},
+      UPF_CREATE_DT = #{upfCreateDt,jdbcType=TIMESTAMP},
+      UPF_CREATE_USER = #{upfCreateUser,jdbcType=VARCHAR},
+      UPF_MODIFY_DT = #{upfModifyDt,jdbcType=TIMESTAMP},
+      UPF_MODIFY_USER = #{upfModifyUser,jdbcType=VARCHAR},
+      UPF_LDAP_PRINCIPAL = #{upfLdapPrincipal,jdbcType=VARCHAR},
+      UPF_EFS_USER_ID = #{upfEfsUserId,jdbcType=VARCHAR},
+      UPF_TR_ADMIN_GRP_ID = #{upfTrAdminGrpId,jdbcType=VARCHAR},
+      UPF_NOTES_EMAIL = #{upfNotesEmail,jdbcType=VARCHAR},
+      UPF_DIVISION = #{upfDivision,jdbcType=VARCHAR}
+    where UPF_USER_ID = #{upfUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>

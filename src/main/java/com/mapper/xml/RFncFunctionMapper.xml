@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RFncFunctionMapper">
+  <resultMap id="BaseResultMap" type="com.entity.RFncFunction">
+    <id column="FNC_APPL_ID" jdbcType="VARCHAR" property="fncApplId" />
+    <id column="FNC_PARENT_FUNC_ID" jdbcType="VARCHAR" property="fncParentFuncId" />
+    <id column="FNC_FUNC_ID" jdbcType="VARCHAR" property="fncFuncId" />
+    <result column="FNC_DESC" jdbcType="VARCHAR" property="fncDesc" />
+    <result column="FNC_FUNC_TYP" jdbcType="VARCHAR" property="fncFuncTyp" />
+    <result column="FNC_FUNC_SEQ" jdbcType="NUMERIC" property="fncFuncSeq" />
+    <result column="FNC_LINK" jdbcType="VARCHAR" property="fncLink" />
+    <result column="FNC_ONCLICK" jdbcType="VARCHAR" property="fncOnclick" />
+    <result column="FNC_SHOWN_ON_MENU" jdbcType="VARCHAR" property="fncShownOnMenu" />
+    <result column="FNC_POP_UP" jdbcType="VARCHAR" property="fncPopUp" />
+    <result column="FNC_POP_UP_WIDTH" jdbcType="NUMERIC" property="fncPopUpWidth" />
+    <result column="FNC_POP_UP_HEIGHT" jdbcType="NUMERIC" property="fncPopUpHeight" />
+    <result column="FNC_PATH" jdbcType="VARCHAR" property="fncPath" />
+    <result column="FNC_PATH_PARAM" jdbcType="VARCHAR" property="fncPathParam" />
+    <result column="FNC_SCREEN_ID" jdbcType="VARCHAR" property="fncScreenId" />
+    <result column="FNC_PROG_CLASS" jdbcType="VARCHAR" property="fncProgClass" />
+    <result column="FNC_VERSION_NO" jdbcType="NUMERIC" property="fncVersionNo" />
+    <result column="FNC_CREATE_DT" jdbcType="TIMESTAMP" property="fncCreateDt" />
+    <result column="FNC_CREATE_USER" jdbcType="VARCHAR" property="fncCreateUser" />
+    <result column="FNC_MODIFY_DT" jdbcType="TIMESTAMP" property="fncModifyDt" />
+    <result column="FNC_MODIFY_USER" jdbcType="VARCHAR" property="fncModifyUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FNC_APPL_ID, FNC_PARENT_FUNC_ID, FNC_FUNC_ID, FNC_DESC, FNC_FUNC_TYP, FNC_FUNC_SEQ, 
+    FNC_LINK, FNC_ONCLICK, FNC_SHOWN_ON_MENU, FNC_POP_UP, FNC_POP_UP_WIDTH, FNC_POP_UP_HEIGHT, 
+    FNC_PATH, FNC_PATH_PARAM, FNC_SCREEN_ID, FNC_PROG_CLASS, FNC_VERSION_NO, FNC_CREATE_DT, 
+    FNC_CREATE_USER, FNC_MODIFY_DT, FNC_MODIFY_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.RFncFunctionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from R_FNC_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.entity.RFncFunctionKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from R_FNC_FUNCTION
+    where FNC_APPL_ID = #{fncApplId,jdbcType=VARCHAR}
+      and FNC_PARENT_FUNC_ID = #{fncParentFuncId,jdbcType=VARCHAR}
+      and FNC_FUNC_ID = #{fncFuncId,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectAll" parameterType="com.entity.RFncFunctionKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from R_FNC_FUNCTION
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.entity.RFncFunctionKey">
+    delete from R_FNC_FUNCTION
+    where FNC_APPL_ID = #{fncApplId,jdbcType=VARCHAR}
+      and FNC_PARENT_FUNC_ID = #{fncParentFuncId,jdbcType=VARCHAR}
+      and FNC_FUNC_ID = #{fncFuncId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.RFncFunctionExample">
+    delete from R_FNC_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.RFncFunction">
+    insert into R_FNC_FUNCTION (FNC_APPL_ID, FNC_PARENT_FUNC_ID, FNC_FUNC_ID, 
+      FNC_DESC, FNC_FUNC_TYP, FNC_FUNC_SEQ, 
+      FNC_LINK, FNC_ONCLICK, FNC_SHOWN_ON_MENU, 
+      FNC_POP_UP, FNC_POP_UP_WIDTH, FNC_POP_UP_HEIGHT, 
+      FNC_PATH, FNC_PATH_PARAM, FNC_SCREEN_ID, 
+      FNC_PROG_CLASS, FNC_VERSION_NO, FNC_CREATE_DT, 
+      FNC_CREATE_USER, FNC_MODIFY_DT, FNC_MODIFY_USER
+      )
+    values (#{fncApplId,jdbcType=VARCHAR}, #{fncParentFuncId,jdbcType=VARCHAR}, #{fncFuncId,jdbcType=VARCHAR}, 
+      #{fncDesc,jdbcType=VARCHAR}, #{fncFuncTyp,jdbcType=VARCHAR}, #{fncFuncSeq,jdbcType=NUMERIC}, 
+      #{fncLink,jdbcType=VARCHAR}, #{fncOnclick,jdbcType=VARCHAR}, #{fncShownOnMenu,jdbcType=VARCHAR}, 
+      #{fncPopUp,jdbcType=VARCHAR}, #{fncPopUpWidth,jdbcType=NUMERIC}, #{fncPopUpHeight,jdbcType=NUMERIC}, 
+      #{fncPath,jdbcType=VARCHAR}, #{fncPathParam,jdbcType=VARCHAR}, #{fncScreenId,jdbcType=VARCHAR}, 
+      #{fncProgClass,jdbcType=VARCHAR}, #{fncVersionNo,jdbcType=NUMERIC}, #{fncCreateDt,jdbcType=TIMESTAMP}, 
+      #{fncCreateUser,jdbcType=VARCHAR}, #{fncModifyDt,jdbcType=TIMESTAMP}, #{fncModifyUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.RFncFunction">
+    insert into R_FNC_FUNCTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fncApplId != null">
+        FNC_APPL_ID,
+      </if>
+      <if test="fncParentFuncId != null">
+        FNC_PARENT_FUNC_ID,
+      </if>
+      <if test="fncFuncId != null">
+        FNC_FUNC_ID,
+      </if>
+      <if test="fncDesc != null">
+        FNC_DESC,
+      </if>
+      <if test="fncFuncTyp != null">
+        FNC_FUNC_TYP,
+      </if>
+      <if test="fncFuncSeq != null">
+        FNC_FUNC_SEQ,
+      </if>
+      <if test="fncLink != null">
+        FNC_LINK,
+      </if>
+      <if test="fncOnclick != null">
+        FNC_ONCLICK,
+      </if>
+      <if test="fncShownOnMenu != null">
+        FNC_SHOWN_ON_MENU,
+      </if>
+      <if test="fncPopUp != null">
+        FNC_POP_UP,
+      </if>
+      <if test="fncPopUpWidth != null">
+        FNC_POP_UP_WIDTH,
+      </if>
+      <if test="fncPopUpHeight != null">
+        FNC_POP_UP_HEIGHT,
+      </if>
+      <if test="fncPath != null">
+        FNC_PATH,
+      </if>
+      <if test="fncPathParam != null">
+        FNC_PATH_PARAM,
+      </if>
+      <if test="fncScreenId != null">
+        FNC_SCREEN_ID,
+      </if>
+      <if test="fncProgClass != null">
+        FNC_PROG_CLASS,
+      </if>
+      <if test="fncVersionNo != null">
+        FNC_VERSION_NO,
+      </if>
+      <if test="fncCreateDt != null">
+        FNC_CREATE_DT,
+      </if>
+      <if test="fncCreateUser != null">
+        FNC_CREATE_USER,
+      </if>
+      <if test="fncModifyDt != null">
+        FNC_MODIFY_DT,
+      </if>
+      <if test="fncModifyUser != null">
+        FNC_MODIFY_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fncApplId != null">
+        #{fncApplId,jdbcType=VARCHAR},
+      </if>
+      <if test="fncParentFuncId != null">
+        #{fncParentFuncId,jdbcType=VARCHAR},
+      </if>
+      <if test="fncFuncId != null">
+        #{fncFuncId,jdbcType=VARCHAR},
+      </if>
+      <if test="fncDesc != null">
+        #{fncDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fncFuncTyp != null">
+        #{fncFuncTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="fncFuncSeq != null">
+        #{fncFuncSeq,jdbcType=NUMERIC},
+      </if>
+      <if test="fncLink != null">
+        #{fncLink,jdbcType=VARCHAR},
+      </if>
+      <if test="fncOnclick != null">
+        #{fncOnclick,jdbcType=VARCHAR},
+      </if>
+      <if test="fncShownOnMenu != null">
+        #{fncShownOnMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPopUp != null">
+        #{fncPopUp,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPopUpWidth != null">
+        #{fncPopUpWidth,jdbcType=NUMERIC},
+      </if>
+      <if test="fncPopUpHeight != null">
+        #{fncPopUpHeight,jdbcType=NUMERIC},
+      </if>
+      <if test="fncPath != null">
+        #{fncPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPathParam != null">
+        #{fncPathParam,jdbcType=VARCHAR},
+      </if>
+      <if test="fncScreenId != null">
+        #{fncScreenId,jdbcType=VARCHAR},
+      </if>
+      <if test="fncProgClass != null">
+        #{fncProgClass,jdbcType=VARCHAR},
+      </if>
+      <if test="fncVersionNo != null">
+        #{fncVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="fncCreateDt != null">
+        #{fncCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fncCreateUser != null">
+        #{fncCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fncModifyDt != null">
+        #{fncModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fncModifyUser != null">
+        #{fncModifyUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.RFncFunctionExample" resultType="java.lang.Long">
+    select count(*) from R_FNC_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update R_FNC_FUNCTION
+    <set>
+      <if test="row.fncApplId != null">
+        FNC_APPL_ID = #{row.fncApplId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncParentFuncId != null">
+        FNC_PARENT_FUNC_ID = #{row.fncParentFuncId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncFuncId != null">
+        FNC_FUNC_ID = #{row.fncFuncId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncDesc != null">
+        FNC_DESC = #{row.fncDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncFuncTyp != null">
+        FNC_FUNC_TYP = #{row.fncFuncTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncFuncSeq != null">
+        FNC_FUNC_SEQ = #{row.fncFuncSeq,jdbcType=NUMERIC},
+      </if>
+      <if test="row.fncLink != null">
+        FNC_LINK = #{row.fncLink,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncOnclick != null">
+        FNC_ONCLICK = #{row.fncOnclick,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncShownOnMenu != null">
+        FNC_SHOWN_ON_MENU = #{row.fncShownOnMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncPopUp != null">
+        FNC_POP_UP = #{row.fncPopUp,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncPopUpWidth != null">
+        FNC_POP_UP_WIDTH = #{row.fncPopUpWidth,jdbcType=NUMERIC},
+      </if>
+      <if test="row.fncPopUpHeight != null">
+        FNC_POP_UP_HEIGHT = #{row.fncPopUpHeight,jdbcType=NUMERIC},
+      </if>
+      <if test="row.fncPath != null">
+        FNC_PATH = #{row.fncPath,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncPathParam != null">
+        FNC_PATH_PARAM = #{row.fncPathParam,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncScreenId != null">
+        FNC_SCREEN_ID = #{row.fncScreenId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncProgClass != null">
+        FNC_PROG_CLASS = #{row.fncProgClass,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncVersionNo != null">
+        FNC_VERSION_NO = #{row.fncVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="row.fncCreateDt != null">
+        FNC_CREATE_DT = #{row.fncCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.fncCreateUser != null">
+        FNC_CREATE_USER = #{row.fncCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fncModifyDt != null">
+        FNC_MODIFY_DT = #{row.fncModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.fncModifyUser != null">
+        FNC_MODIFY_USER = #{row.fncModifyUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update R_FNC_FUNCTION
+    set FNC_APPL_ID = #{row.fncApplId,jdbcType=VARCHAR},
+      FNC_PARENT_FUNC_ID = #{row.fncParentFuncId,jdbcType=VARCHAR},
+      FNC_FUNC_ID = #{row.fncFuncId,jdbcType=VARCHAR},
+      FNC_DESC = #{row.fncDesc,jdbcType=VARCHAR},
+      FNC_FUNC_TYP = #{row.fncFuncTyp,jdbcType=VARCHAR},
+      FNC_FUNC_SEQ = #{row.fncFuncSeq,jdbcType=NUMERIC},
+      FNC_LINK = #{row.fncLink,jdbcType=VARCHAR},
+      FNC_ONCLICK = #{row.fncOnclick,jdbcType=VARCHAR},
+      FNC_SHOWN_ON_MENU = #{row.fncShownOnMenu,jdbcType=VARCHAR},
+      FNC_POP_UP = #{row.fncPopUp,jdbcType=VARCHAR},
+      FNC_POP_UP_WIDTH = #{row.fncPopUpWidth,jdbcType=NUMERIC},
+      FNC_POP_UP_HEIGHT = #{row.fncPopUpHeight,jdbcType=NUMERIC},
+      FNC_PATH = #{row.fncPath,jdbcType=VARCHAR},
+      FNC_PATH_PARAM = #{row.fncPathParam,jdbcType=VARCHAR},
+      FNC_SCREEN_ID = #{row.fncScreenId,jdbcType=VARCHAR},
+      FNC_PROG_CLASS = #{row.fncProgClass,jdbcType=VARCHAR},
+      FNC_VERSION_NO = #{row.fncVersionNo,jdbcType=NUMERIC},
+      FNC_CREATE_DT = #{row.fncCreateDt,jdbcType=TIMESTAMP},
+      FNC_CREATE_USER = #{row.fncCreateUser,jdbcType=VARCHAR},
+      FNC_MODIFY_DT = #{row.fncModifyDt,jdbcType=TIMESTAMP},
+      FNC_MODIFY_USER = #{row.fncModifyUser,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.RFncFunction">
+    update R_FNC_FUNCTION
+    <set>
+      <if test="fncDesc != null">
+        FNC_DESC = #{fncDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fncFuncTyp != null">
+        FNC_FUNC_TYP = #{fncFuncTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="fncFuncSeq != null">
+        FNC_FUNC_SEQ = #{fncFuncSeq,jdbcType=NUMERIC},
+      </if>
+      <if test="fncLink != null">
+        FNC_LINK = #{fncLink,jdbcType=VARCHAR},
+      </if>
+      <if test="fncOnclick != null">
+        FNC_ONCLICK = #{fncOnclick,jdbcType=VARCHAR},
+      </if>
+      <if test="fncShownOnMenu != null">
+        FNC_SHOWN_ON_MENU = #{fncShownOnMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPopUp != null">
+        FNC_POP_UP = #{fncPopUp,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPopUpWidth != null">
+        FNC_POP_UP_WIDTH = #{fncPopUpWidth,jdbcType=NUMERIC},
+      </if>
+      <if test="fncPopUpHeight != null">
+        FNC_POP_UP_HEIGHT = #{fncPopUpHeight,jdbcType=NUMERIC},
+      </if>
+      <if test="fncPath != null">
+        FNC_PATH = #{fncPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fncPathParam != null">
+        FNC_PATH_PARAM = #{fncPathParam,jdbcType=VARCHAR},
+      </if>
+      <if test="fncScreenId != null">
+        FNC_SCREEN_ID = #{fncScreenId,jdbcType=VARCHAR},
+      </if>
+      <if test="fncProgClass != null">
+        FNC_PROG_CLASS = #{fncProgClass,jdbcType=VARCHAR},
+      </if>
+      <if test="fncVersionNo != null">
+        FNC_VERSION_NO = #{fncVersionNo,jdbcType=NUMERIC},
+      </if>
+      <if test="fncCreateDt != null">
+        FNC_CREATE_DT = #{fncCreateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fncCreateUser != null">
+        FNC_CREATE_USER = #{fncCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fncModifyDt != null">
+        FNC_MODIFY_DT = #{fncModifyDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fncModifyUser != null">
+        FNC_MODIFY_USER = #{fncModifyUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FNC_APPL_ID = #{fncApplId,jdbcType=VARCHAR}
+      and FNC_PARENT_FUNC_ID = #{fncParentFuncId,jdbcType=VARCHAR}
+      and FNC_FUNC_ID = #{fncFuncId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.RFncFunction">
+    update R_FNC_FUNCTION
+    set FNC_DESC = #{fncDesc,jdbcType=VARCHAR},
+      FNC_FUNC_TYP = #{fncFuncTyp,jdbcType=VARCHAR},
+      FNC_FUNC_SEQ = #{fncFuncSeq,jdbcType=NUMERIC},
+      FNC_LINK = #{fncLink,jdbcType=VARCHAR},
+      FNC_ONCLICK = #{fncOnclick,jdbcType=VARCHAR},
+      FNC_SHOWN_ON_MENU = #{fncShownOnMenu,jdbcType=VARCHAR},
+      FNC_POP_UP = #{fncPopUp,jdbcType=VARCHAR},
+      FNC_POP_UP_WIDTH = #{fncPopUpWidth,jdbcType=NUMERIC},
+      FNC_POP_UP_HEIGHT = #{fncPopUpHeight,jdbcType=NUMERIC},
+      FNC_PATH = #{fncPath,jdbcType=VARCHAR},
+      FNC_PATH_PARAM = #{fncPathParam,jdbcType=VARCHAR},
+      FNC_SCREEN_ID = #{fncScreenId,jdbcType=VARCHAR},
+      FNC_PROG_CLASS = #{fncProgClass,jdbcType=VARCHAR},
+      FNC_VERSION_NO = #{fncVersionNo,jdbcType=NUMERIC},
+      FNC_CREATE_DT = #{fncCreateDt,jdbcType=TIMESTAMP},
+      FNC_CREATE_USER = #{fncCreateUser,jdbcType=VARCHAR},
+      FNC_MODIFY_DT = #{fncModifyDt,jdbcType=TIMESTAMP},
+      FNC_MODIFY_USER = #{fncModifyUser,jdbcType=VARCHAR}
+    where FNC_APPL_ID = #{fncApplId,jdbcType=VARCHAR}
+      and FNC_PARENT_FUNC_ID = #{fncParentFuncId,jdbcType=VARCHAR}
+      and FNC_FUNC_ID = #{fncFuncId,jdbcType=VARCHAR}
+  </update>
+</mapper>

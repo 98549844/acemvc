@@ -1,8 +1,8 @@
 package com.controller;
 
-import com.entity.UserProfile;
-import com.entity.Users;
+import com.entity.*;
 import com.service.RFncFunctionService;
+import com.service.RUpfUserProfileService;
 import com.service.UsersService;
 import com.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,13 @@ public class IndexController {
     private UsersService usersService;
     private RFncFunctionService rFncFunctionService;
 
+    private RUpfUserProfileService upfUserProfileService;
+
     @Autowired
-    public IndexController(UsersService usersService, RFncFunctionService rFncFunctionService) {
+    public IndexController(UsersService usersService, RFncFunctionService rFncFunctionService, RUpfUserProfileService upfUserProfileService) {
         this.usersService = usersService;
         this.rFncFunctionService = rFncFunctionService;
-
+        this.upfUserProfileService = upfUserProfileService;
     }
 
     @RequestMapping(value = "/print", method = RequestMethod.GET)
@@ -55,6 +57,7 @@ public class IndexController {
         return ls;
     }
 
+
     @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
     public List<UserProfile> getAllMpfaUsers() {
         List<UserProfile> users = usersService.findAllMpfaDemoUsers();
@@ -66,8 +69,18 @@ public class IndexController {
         return users;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllProfile")
+    public List<RUpfUserProfile> getAllProfile() {
+        List<RUpfUserProfile> profiles = upfUserProfileService.selectAll();
 
-/*    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
+        for (int i = 0; i < profiles.size(); i++) {
+            System.out.println("USER profiles:   " + profiles.get(i).getUpfEngName());
+        }
+        return profiles;
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
     public List<RFncFunction> getAllRfn() {
         try {
             List<RFncFunction> ls = rFncFunctionService.findAll();
@@ -97,8 +110,7 @@ public class IndexController {
             e.printStackTrace();
         }
         return null;
-    }*/
-
+    }
 
 
 }

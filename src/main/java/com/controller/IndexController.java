@@ -25,7 +25,6 @@ public class IndexController {
 
     private UsersService usersService;
     private RFncFunctionService rFncFunctionService;
-
     private RUpfUserProfileService upfUserProfileService;
 
     @Autowired
@@ -61,7 +60,6 @@ public class IndexController {
     @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
     public List<UserProfile> getAllMpfaUsers() {
         List<UserProfile> users = usersService.findAllMpfaDemoUsers();
-
         for (int i = 0; i < users.size(); i++) {
             System.out.println("MPFA USER:   " + users.get(i).getEnglishFirstName());
         }
@@ -72,7 +70,6 @@ public class IndexController {
     @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllProfile")
     public List<RUpfUserProfile> getAllProfile() {
         List<RUpfUserProfile> profiles = upfUserProfileService.selectAll();
-
         for (int i = 0; i < profiles.size(); i++) {
             System.out.println("USER profiles:   " + profiles.get(i).getUpfEngName());
         }

@@ -46,8 +46,8 @@
         <!--    <package name="com.sun.dao"/>-->
         <!--    <mapper class="com.sun.dao.UserMapper"/>-->
         <mapper resource="com/mapper/xml/UsersMapper.xml"/>
-        <mapper resource="com/mapper/xml/UserProfileDAO.xml"/>
+       <!-- <mapper resource="com/mapper/xml/UserProfileDAO.xml"/>
         <mapper resource="com/mapper/xml/RFncFunctionMapper.xml"/>
-        <mapper resource="com/mapper/xml/RUpfUserProfileMapper.xml"/>
+        <mapper resource="com/mapper/xml/RUpfUserProfileMapper.xml"/>-->
     </mappers>
 </configuration>

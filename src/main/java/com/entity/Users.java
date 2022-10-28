@@ -5,14 +5,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "constraint_userAccount", columnNames = "userAccount")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "constraint_userAccount", columnNames = {"userAccount"}), @UniqueConstraint(name = "constraint_email", columnNames = {"email"})})
 @Entity
 public class Users extends baseEntity implements Serializable  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @GenericGenerator(strategy = "identity", name = "id")
@@ -37,12 +37,12 @@ public class Users extends baseEntity implements Serializable  {
     @Column
     private String gender;
     @Column
-    private LocalDateTime birthday;
+    private LocalDateTime dateOfBirth;
     private long age = 0l;
     @Column
     private LocalDateTime loginDateTime;
     @Column
-    private String status = "ACTIVE"; // ACTIVE || INACTIVE
+    private String status = "ACTIVE"; // ACTIVE || INACTIVE //决定模组功能是否开启
 
 
     @Column
@@ -58,7 +58,7 @@ public class Users extends baseEntity implements Serializable  {
     private  LocalDateTime expireDate ;
 
     @Column
-    private boolean enabled = true; // user control
+    private boolean enabled = true; // user account
 
     public Long getUserId() {
         return userId;
@@ -124,12 +124,13 @@ public class Users extends baseEntity implements Serializable  {
         this.gender = gender;
     }
 
-    public LocalDateTime getBirthday() {
-        return birthday;
+
+    public LocalDateTime getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getDomain() {

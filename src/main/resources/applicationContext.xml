@@ -60,5 +60,6 @@
     <import resource="classpath:springDataSource.xml"/>
     <import resource="classpath:springService.xml"/>
     <import resource="classpath:springMvc.xml"/>
+<!--    <import resource="classpath:springJndiResource.xml"/>-->
 
 </beans>

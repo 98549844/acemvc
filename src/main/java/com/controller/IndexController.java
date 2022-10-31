@@ -51,7 +51,7 @@ public class IndexController {
     public List<Users> getAllByIdMybatis() {
         List<Users> ls = usersService.findAllByMybatis();
         for (int i = 0; i < ls.size(); i++) {
-            System.out.println(ls.get(i).getUserAccount());
+            System.out.println("User Name => "+ls.get(i).getUserAccount());
         }
         return ls;
     }

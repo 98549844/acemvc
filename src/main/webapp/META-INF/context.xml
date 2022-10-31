@@ -1,2 +1,2 @@
 <!--<ResourceLink global="jdbc/mysql" name="jdbc/mysql" type="javax.sql.DataSource"/>-->
-<ResourceLink global="dmap/global" name="dmap/global" type="javax.sql.DataSource"/>
+<!--<ResourceLink global="dmap/global" name="dmap/global" type="javax.sql.DataSource"/>-->

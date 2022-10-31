@@ -6,6 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-    response.sendRedirect("mybatis/getAllProfile");
+    response.sendRedirect("mybatis/getAll");
 %>
 

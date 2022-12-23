@@ -74,6 +74,17 @@
             </servlet-mapping>
     -->
 
+
+    <servlet>
+        <servlet-name>SetCustomFunctionExp4JServlet</servlet-name>
+        <servlet-class>com.exp4j.SetCustomFunctionExp4JServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetCustomFunctionExp4JServlet</servlet-name>
+        <url-pattern>/setcustonfunction.do</url-pattern>
+    </servlet-mapping>
+
+
     <resource-ref>
         <description>Mail Session using Tomcat</description>
         <res-ref-name>mail/mpfa</res-ref-name>

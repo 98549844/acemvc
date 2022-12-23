@@ -15,8 +15,7 @@ import java.util.Map;
 /**
  * @author Leo Gutierrez R. <leogutierrezramirez@gmail.com>
  */
-public class Exp4JTagHandler extends SimpleTagSupport
-implements DynamicAttributes {
+public class Exp4JTagHandler extends SimpleTagSupport implements DynamicAttributes {
 
     private String expr;
     private Function customFunction;
@@ -35,19 +34,19 @@ implements DynamicAttributes {
 
             ExpressionBuilder e = new ExpressionBuilder(expr);
 
-            for(String varName : tagsAttrs.keySet()) {
+            for (String varName : tagsAttrs.keySet()) {
                 e.variable(varName);
             }
 
             Expression expresionParser = null;
-            if(customFunction != null) {
+            if (customFunction != null) {
                 expresionParser = e.function(customFunction).build();
             } else {
                 expresionParser = e.build();
             }
 
-            for(String varName : tagsAttrs.keySet()) {
-                expresionParser.setVariable(varName, (Double)tagsAttrs.get(varName));
+            for (String varName : tagsAttrs.keySet()) {
+                expresionParser.setVariable(varName, (Double) tagsAttrs.get(varName));
             }
             out.println(expresionParser.evaluate());
         } catch (java.io.IOException ex) {
@@ -70,7 +69,7 @@ implements DynamicAttributes {
             System.out.println("localName: " + localName);
             System.out.println("value: " + value);
             tagsAttrs.put(localName, Double.parseDouble(value.toString()));
-        } catch(NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new JspException(value.toString() + " -> incorrect numeric value.");
         }
     }

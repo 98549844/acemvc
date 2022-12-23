@@ -34,6 +34,14 @@ public class IndexController {
         this.upfUserProfileService = upfUserProfileService;
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public ModelAndView index() {
+        System.out.println("Hello index !!!");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("Hello index");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/print", method = RequestMethod.GET)
     public void printBean() {
         BeanUtil.printBeanNameByContextLoader();
@@ -41,7 +49,7 @@ public class IndexController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public ModelAndView helloWorld() {
-        System.out.println("Hello World ~~~");
+        System.out.println("Hello World !!!");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("Hello World");
         return modelAndView;
@@ -54,59 +62,6 @@ public class IndexController {
             System.out.println("User Name => "+ls.get(i).getUserAccount());
         }
         return ls;
-    }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getMpfaUsers")
-    public List<UserProfile> getAllMpfaUsers() {
-        List<UserProfile> users = usersService.findAllMpfaDemoUsers();
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println("MPFA USER:   " + users.get(i).getEnglishFirstName());
-        }
-
-        return users;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllProfile")
-    public List<RUpfUserProfile> getAllProfile() {
-        List<RUpfUserProfile> profiles = upfUserProfileService.selectAll();
-        for (int i = 0; i < profiles.size(); i++) {
-            System.out.println("USER profiles:   " + profiles.get(i).getUpfEngName());
-        }
-        return profiles;
-    }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getAllRfn")
-    public List<RFncFunction> getAllRfn() {
-        try {
-            List<RFncFunction> ls = rFncFunctionService.findAll();
-            for (int i = 0; i < ls.size(); i++) {
-                System.out.println(ls.get(i).getFncDesc());
-            }
-            return ls;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/mybatis/getRfn")
-    public RFncFunction getRfn() {
-
-        RFncFunctionKey key = new RFncFunctionKey();
-        key.setFncApplId("ACE2DEMO");
-        key.setFncParentFuncId("ACE2DEMO");
-        key.setFncFuncId("RANK");
-
-        try {
-            RFncFunction rFncFunction = rFncFunctionService.findByKey(key);
-            System.out.println(rFncFunction.getFncDesc());
-            return rFncFunction;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 
